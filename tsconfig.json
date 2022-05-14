@@ -22,6 +22,9 @@
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
       "@models/*": ["./src/models/*"]
-    }              
-  }
+    }
+  },
+  "include": [
+    "./src/**/*"
+  ]
 }
