@@ -1,11 +1,4 @@
-import express from 'express'
-import '@controllers/UsersController'
-
-const app = express()
-
-app.get('/', (req, res) => {
-  return res.send('Hi there! Welcome to the Generate Fake People API.')
-})
+import app from './app'
 
 const port = 3333
 

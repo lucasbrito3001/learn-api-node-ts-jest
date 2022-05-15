@@ -1,8 +1,13 @@
-import { User } from '../models/User'
+import app from '../app'
+import request from 'supertest'
 
-test('it should be ok', () => {
-  const user = new User('Lucas', 'lucas.debrito@lexartlabs.com')
+describe('Testing root path', () => {
+  test('Testing app', async () => {
+    const response = await request(app).get('/')
 
-  expect(user.name).toEqual('Lucas')
-  expect(user.email).toEqual('lucas.debrito@lexartlabs.com')
+    expect(response.body).toStrictEqual({
+      code: 200,
+      message: 'Hi there! Welcome to the API.'
+    })
+  })
 })
