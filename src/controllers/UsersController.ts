@@ -1,4 +1,4 @@
-import { User } from '@models/User'
+import { User } from '@models/People'
 
 export class UsersController {
   teste (name: string, email: string) {
