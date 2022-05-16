@@ -1,6 +1,6 @@
 import { names, surnames } from '../database/names.json'
 import { UF } from '../database/states.json'
-import { estados } from '../database/cities.json'
+import cities from '../database/cities.json'
 
 interface PeopleDTO {
   name: string;
@@ -14,29 +14,22 @@ interface States {
   sigla: string;
 }
 
-interface CitiesByStates {
-  sigla: string;
-  nome: string;
-  cidades: string[];
-}
-
 export class People {
   name: string
   state: string
   city: string
   age: number
-  randomKey: number
 
   constructor () {
-    this.randomKey = Math.ceil(Math.random() * names.length)
+    const selectedState = UF[this.generateRandomKey(UF.length)]
+    const state: States = selectedState
+    const citiesByselectedState = cities[state.sigla as keyof typeof cities]
 
-    const state: States = UF[this.randomKey]
-    const citiesByStates: Array<CitiesByStates> = estados
-
-    this.name = `${names[this.randomKey]} ${surnames[this.randomKey]}`
+    this.name = `${names[this.generateRandomKey(names.length)]} ${surnames[this.generateRandomKey(surnames.length)]}`
     this.age = Math.ceil(Math.random() * 100)
     this.state = `${state.sigla} - ${state.nome}`
-    this.city = `${citiesByStates.find(item => item.sigla === state.sigla)}`
+
+    this.city = `${citiesByselectedState[this.generateRandomKey(citiesByselectedState.length)]}`
   }
 
   createPeople = () => {
@@ -48,5 +41,9 @@ export class People {
     }
 
     return people
+  }
+
+  generateRandomKey = (length: number) => {
+    return Math.ceil(Math.random() * length)
   }
 }
